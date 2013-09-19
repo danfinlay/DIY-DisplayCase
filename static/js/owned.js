@@ -10,11 +10,11 @@ if(userIdStart !== -1){
 
 	$.getJSON(achievementURL, function(data){
 		if(data){
-			console.log(data.response.skills);
+			// console.log(data.response.skills);
 			badgesOwned = _.map(data.response.skills, function(a){
 				return a.id;
 			});
-			console.log(badgesOwned);
+			// console.log(badgesOwned);
 			highlightOwned();
 		}
 	});
@@ -22,7 +22,7 @@ if(userIdStart !== -1){
 
 
 function highlightOwned(){
-	console.log("Highlighting owned: ");
+	// console.log("Highlighting owned: ");
 	for(var i = 0; i < badgesOwned.length; i++){
 		// console.log("Badge "+i+" is ", $('div.badge[badgeId="'+badgesOwned[i]+'"]'))
 		$('div.badge[badgeId="'+badgesOwned[i]+'"]').css('opacity', 1.0);

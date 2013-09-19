@@ -83,7 +83,6 @@ function makeDraggable(){
 			requestAnimationFrame(animationLoop);     
 
 			if(!isDragging && mapVelocity[0] !== 0 && mapVelocity[1] !== 0){
-				console.log("Velocity dragging");
 				mapVelocity = [mapVelocity[0]*0.95, mapVelocity[1]*0.95];
 				mapCoords = [mapCoords[0] - mapVelocity[0], mapCoords[1] - mapVelocity[1]];
 				translateMap();
