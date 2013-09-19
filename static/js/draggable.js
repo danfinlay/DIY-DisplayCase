@@ -63,7 +63,7 @@ function makeDraggable(){
 
 
 	function translateMap(){
-		// var transform = 'translateX('+mapCoords[0]+'px) translateY('+mapCoords[1]+'px)';
+		var transform = 'translateX('+mapCoords[0]+'px) translateY('+mapCoords[1]+'px)';
 		// console.log(transform);
 		$badgeMap.css('transform', transform);
 		$badgeMap.css('-moz-transform', transform);
