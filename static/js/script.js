@@ -1,13 +1,12 @@
 function runFunction(){
 	var badgesWide = 20;
 
-	// //Scale container to window:
-	// $('#badgeMap').css('width', (badgesWide * 143) + 72;
 	$('#badgeMapContainer').css('height', $(window).height());
 
 	//Scale badge map:
+	window.trophyCaseDimensions = [badgesWide * 143, 1300];
 	$badgeMap = $('#badgeMap');
-	$badgeMap.css('width', badgesWide * 143);
+	$badgeMap.css('width', window.trophyCaseDimensions[1]);
 
 	//Align badges:
 

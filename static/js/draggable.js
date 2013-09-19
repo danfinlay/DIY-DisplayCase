@@ -1,6 +1,8 @@
 function makeDraggable(){
 
 	var velocityModeEnabled = true;
+	var bouncyMode = true;
+	var bouncing = [false, false];
 	
 	var mapCoords = [0,0];
 	var mapVelocity = [0,0];
@@ -77,6 +79,10 @@ function makeDraggable(){
 	}
   
 	if(velocityModeEnabled){
+		var xLimitLow = -Math.floor( window.trophyCaseDimensions[0] * 0.4);
+		var yLimitLow = -Math.floor( window.trophyCaseDimensions[1] * 0.7);
+		var xLimitHigh = Math.floor( $(window).width() / 2 );
+		var yLimitHigh = Math.floor( $(window).height() / 2 );
 
 		function animationLoop(d){
 
@@ -85,11 +91,31 @@ function makeDraggable(){
 			if(!isDragging && mapVelocity[0] !== 0 && mapVelocity[1] !== 0){
 				mapVelocity = [mapVelocity[0]*0.95, mapVelocity[1]*0.95];
 				mapCoords = [mapCoords[0] - mapVelocity[0], mapCoords[1] - mapVelocity[1]];
-				translateMap();
-	  // Firefox 23 / IE 10 / Chrome
-				// window.mozRequestAnimationFrame(animationLoop);    // Firefox < 23
-				// window.webkitRequestAnimationFrame(animationLoop);
 
+				if(bouncyMode){
+
+					//For debugging bounce ranges:
+					// console.log("x: "+mapCoords[0] + " y: "+mapCoords[1]);
+					// console.log("Low x: "+xLimitLow+" Low y: "+yLimitLow);
+					// console.log("High x: "+xLimitHigh+" High y: "+yLimitHigh);
+
+					if( (mapCoords[0] < xLimitLow || mapCoords[0] > xLimitHigh ) && !bouncing[0]){
+						bouncing[0] = true;
+						mapVelocity[0] *= -1;
+					}else{
+						bouncing[0] = false;
+					}
+
+					if( (mapCoords[1] < yLimitLow || mapCoords[1] > yLimitHigh ) && !bouncing[1]){
+						mapVelocity[1] *= -1;
+						bouncing[1] = true;
+					}else{
+						bouncing[1] = false;
+					}
+				}
+				
+
+				translateMap();
 			}
 		}
 
