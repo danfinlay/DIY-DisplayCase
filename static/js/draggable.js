@@ -1,5 +1,9 @@
 function makeDraggable(){
+
+	var velocityModeEnabled = true;
+	
 	var mapCoords = [0,0];
+	var mapVelocity = [0,0];
 
 	var mouseLocation;
 	var isDragging = false;
@@ -55,12 +59,11 @@ function makeDraggable(){
 
 	function draggedTo(x, y){
 		if(!mouseLocation) mouseLocation = [x,y];
-		var dragVector = [mouseLocation[0]-x, mouseLocation[1]-y];
+		mapVelocity = [mouseLocation[0]-x, mouseLocation[1]-y];
 		mouseLocation = [x,y];
-		mapCoords = [mapCoords[0] - dragVector[0], mapCoords[1] - dragVector[1]];
+		mapCoords = [mapCoords[0] - mapVelocity[0], mapCoords[1] - mapVelocity[1]];
 		translateMap();
 	}
-
 
 	function translateMap(){
 		var transform = 'translateX('+mapCoords[0]+'px) translateY('+mapCoords[1]+'px)';
@@ -72,4 +75,52 @@ function makeDraggable(){
 		$badgeMap.css('-ms-transform', transform);
 
 	}
+  
+	if(velocityModeEnabled){
+
+		function animationLoop(d){
+
+			requestAnimationFrame(animationLoop);     
+
+			if(!isDragging && mapVelocity[0] !== 0 && mapVelocity[1] !== 0){
+				console.log("Velocity dragging");
+				mapVelocity = [mapVelocity[0]*0.95, mapVelocity[1]*0.95];
+				mapCoords = [mapCoords[0] - mapVelocity[0], mapCoords[1] - mapVelocity[1]];
+				translateMap();
+	  // Firefox 23 / IE 10 / Chrome
+				// window.mozRequestAnimationFrame(animationLoop);    // Firefox < 23
+				// window.webkitRequestAnimationFrame(animationLoop);
+
+			}
+		}
+
+		(function() {
+	    var lastTime = 0;
+	    var vendors = ['ms', 'moz', 'webkit', 'o'];
+	    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+	        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+	        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+	                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+	    }
+	 
+	    if (!window.requestAnimationFrame)
+	        window.requestAnimationFrame = function(callback, element) {
+	            var currTime = new Date().getTime();
+	            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+	            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+	              timeToCall);
+	            lastTime = currTime + timeToCall;
+	            return id;
+	        };
+	 
+		    if (!window.cancelAnimationFrame)
+		        window.cancelAnimationFrame = function(id) {
+		            clearTimeout(id);
+		        };
+			}());
+
+
+		animationLoop();
+	}
+
 }
