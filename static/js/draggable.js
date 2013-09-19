@@ -119,6 +119,9 @@ function makeDraggable(){
 			}
 		}
 
+		// This closure allows easy use of requestAnimationFrame()
+		// As described in this blog post:
+		// http://creativejs.com/resources/requestanimationframe/
 		(function() {
 	    var lastTime = 0;
 	    var vendors = ['ms', 'moz', 'webkit', 'o'];
