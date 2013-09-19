@@ -73,6 +73,7 @@ function makeDraggable(){
 		translateMap();
 	}
 
+	$body = $('body');
 	function translateMap(){
 		var transform = 'translateX('+mapCoords[0]+'px) translateY('+mapCoords[1]+'px)';
 		// console.log(transform);
@@ -81,6 +82,8 @@ function makeDraggable(){
 		$badgeMap.css('-webkit-transform', transform);
 		$badgeMap.css('-o-transform', transform);
 		$badgeMap.css('-ms-transform', transform);
+
+		$body.css('background-position', mapCoords[0]/4+'px '+mapCoords[1]/4+'px');
 
 	}
   

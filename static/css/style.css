@@ -1,7 +1,13 @@
 body{
 	margin:0px;
 	padding:0px;
-	background-color:black;
+	/*background-color:black;*/
+  width:100%;
+  height:100%;
+
+   background-image:url(../img/artist.png);
+   
+   background-color: rgba(42,42,42);
 }
 .badge{
 	position:absolute;
@@ -25,10 +31,12 @@ body{
 }
 #badgeMapContainer{
 	position:relative;
-	background-color: black;
+	/*background-color: black;*/
   width:100%;
   height:100%;
   overflow:hidden;
+
+
 }
 div#badgeMap{
 
@@ -42,6 +50,6 @@ div#badgeMap{
 	-o-transform:  translateX(-100px) translateY(-100px);
 	-ms-transform:  translateX(-100px) translateY(-100px);
 	transform:  translateX(-100px) translateY(-100px);
-
-	background-color:black;
+/*
+	background-color:black;*/
 }
