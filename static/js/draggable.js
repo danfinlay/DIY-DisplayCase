@@ -4,7 +4,12 @@ function makeDraggable(){
 
 	var bouncyMode = true;
 	var bouncing = [false, false];
-	var restitution = -0.8;
+
+	//Energy retained from frame to frame:
+	var resistance = 1; // Zero friction, would float forever in a vacuum.
+	// var resistance = 0.95; //A pleasant ammount, like an air hockey table.
+	var restitution = -1; // Impossibly perfectly bouncing walls lose no velocity.
+	// var restitution = -0.92;  //The coefficient of restitution of Zectron, the world's bounciest material!
 	
 	var mapCoords = [0,0];
 	var mapVelocity = [0,0];
@@ -16,36 +21,35 @@ function makeDraggable(){
 
 	$badgeMap = $('div#badgeMap');
 
+	// el.addEventListener("touchstart", handleStart, false);
+ //  el.addEventListener("touchend", handleEnd, false);
+ //  el.addEventListener("touchcancel", handleCancel, false);
+ //  el.addEventListener("touchleave", handleEnd, false);
+ //  el.addEventListener("touchmove", handleMove, false);
+ //  log("initialized.");
 
-	$('div#badgeMap').mousedown(function(e){
-		mouseLocation = [e.clientX, e.clientY];
+
+	$badgeMap.mousedown(touchedDown)
+
+	function touchedDown (e){
 		e.preventDefault();
-		// console.log("Moused down");
+		mouseLocation = [e.clientX, e.clientY];
 		isDragging = true;
 		mouseIsDown = true;
-
-		// ignoreClicks = true;
-	})
+	}
 
 	$('.badge a').click(function(e){
-		// console.log("Click received.");
 		if(ignoreClicks){
-			// console.log("Click ignored.");
 			e.preventDefault();
 		}
-
-		// e.preventDefault();
 	})
 
 	$badgeMap.mouseup(function(e){
-		// console.log("Moused up");
 		e.preventDefault();
 		isDragging = false;
 		mouseIsDown = false;
 
-		// console.log("Stopped dragging.");
 		setTimeout(function(){
-			// console.log("No longer ignoring clicks.");
 			ignoreClicks = false;
 		}, 100);
 	})
@@ -80,19 +84,39 @@ function makeDraggable(){
 
 	}
   
+
+	//Variables needed for bouncing:
+	var xLimitLow, yLimitLow, xLimitHigh, yLimitHigh;
+
+	var configureLimits = function(){
+		// console.log("Width & Height: "+window.width+" and "+window.height);
+		console.log(window.trophyCaseDimensions[0], window.width);
+		xLimitLow = - Math.abs(  window.trophyCaseDimensions[0] - ( window.width * 0.75 ));
+		yLimitLow = - Math.abs(  window.trophyCaseDimensions[1] - ( window.height * 0.8 ));
+		// console.log("Absolutes: "+xLimitLow+", "+yLimitLow);
+		xLimitHigh = Math.floor( window.width / 5 );
+		yLimitHigh = Math.floor( window.height / 5 );
+	}
+
+	$(window).resize(function(){
+		// console.log("Window resized");
+		window.width = $(window).width();
+		window.height = $(window).height();
+		window.badgeMapContainer.css('height', window.height);
+		configureLimits();
+	});
+
 	if(velocityModeEnabled){
-		var xLimitLow = -Math.floor( window.trophyCaseDimensions[0] * 0.4);
-		var yLimitLow = -Math.floor( window.trophyCaseDimensions[1] * 0.7);
-		var xLimitHigh = Math.floor( $(window).width() / 2 );
-		var yLimitHigh = Math.floor( $(window).height() / 2 );
+
+		configureLimits();
 
 		function animationLoop(d){
 
 			requestAnimationFrame(animationLoop);     
 
 			if(!isDragging && mapVelocity[0] !== 0 && mapVelocity[1] !== 0){
-				mapVelocity = [mapVelocity[0]*0.95, mapVelocity[1]*0.95];
-				mapCoords = [mapCoords[0] - mapVelocity[0], mapCoords[1] - mapVelocity[1]];
+				mapVelocity = [ mapVelocity[0] * resistance, mapVelocity[1] * resistance ];
+				mapCoords = [ mapCoords[0] - mapVelocity[0], mapCoords[1] - mapVelocity[1] ];
 
 				if(bouncyMode){
 
