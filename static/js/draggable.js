@@ -1,8 +1,10 @@
 function makeDraggable(){
 
 	var velocityModeEnabled = true;
+
 	var bouncyMode = true;
 	var bouncing = [false, false];
+	var restitution = -0.8;
 	
 	var mapCoords = [0,0];
 	var mapVelocity = [0,0];
@@ -101,13 +103,13 @@ function makeDraggable(){
 
 					if( (mapCoords[0] < xLimitLow || mapCoords[0] > xLimitHigh ) && !bouncing[0]){
 						bouncing[0] = true;
-						mapVelocity[0] *= -1;
+						mapVelocity[0] *= restitution;
 					}else{
 						bouncing[0] = false;
 					}
 
 					if( (mapCoords[1] < yLimitLow || mapCoords[1] > yLimitHigh ) && !bouncing[1]){
-						mapVelocity[1] *= -1;
+						mapVelocity[1] *= restitution;
 						bouncing[1] = true;
 					}else{
 						bouncing[1] = false;
