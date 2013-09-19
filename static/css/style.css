@@ -1,0 +1,47 @@
+body{
+	margin:0px;
+	padding:0px;
+	background-color:black;
+}
+.badge{
+	position:absolute;
+	display:inline-block;
+	padding:0px;
+	margin:0px;
+	opacity:0.5;
+
+	-moz-transition:opacity 0.5s;
+    -webkit-transition:opacity 0.5s;
+    -o-transition:opacity 0.5s;
+    transition:opacity 0.5s;
+}
+.badge img{
+	padding:0px;
+	margin:0px;
+}
+
+.badge:hover{
+	opacity:1.0;
+}
+#badgeMapContainer{
+	position:relative;
+	background-color: black;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+div#badgeMap{
+
+	position:absolute;
+
+	width:1024px;
+	height:1024px;
+
+	-moz-transform:  translateX(-100px) translateY(-100px);
+	-webkit-transform:  translateX(-100px) translateY(-100px);
+	-o-transform:  translateX(-100px) translateY(-100px);
+	-ms-transform:  translateX(-100px) translateY(-100px);
+	transform:  translateX(-100px) translateY(-100px);
+
+	background-color:black;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "diyBadges",
+  "version": "0.0.0",
+  "description": "An interactive map of the DIY Badges.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Dan Finlay",
+  "license": "BSD",
+  "dependencies": {
+    "ecstatic": "~0.4.8",
+    "request": "~2.27.0",
+    "cheerio": "~0.12.2"
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0"
+  }
+}
