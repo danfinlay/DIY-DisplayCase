@@ -6,7 +6,7 @@ body{
   height:100%;
 
    background-image:url(../img/artist.png);
-   
+
    background-color: rgba(42,42,42);
 }
 .badge{
@@ -14,7 +14,7 @@ body{
 	display:inline-block;
 	padding:0px;
 	margin:0px;
-	opacity:0.5;
+	opacity:0.38;
 
 	-moz-transition:opacity 0.5s;
     -webkit-transition:opacity 0.5s;

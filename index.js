@@ -18,4 +18,4 @@ http.createServer(function(req, res){
     	ecstatic({root: __dirname+'/static', handleError:false})(req, res);
     }
 
-}).listen(8005);
+}).listen( parseInt(process.argv[2]) || 8005 );

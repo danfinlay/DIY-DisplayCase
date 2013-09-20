@@ -5,13 +5,13 @@ function makeDraggable(){
 	var bouncyMode = true;
 
 	//Energy retained from frame to frame:
-	// var resistance = 1; // Zero friction, would float forever in a vacuum.
-	var resistance = 0.95; //A pleasant ammount, like an air hockey table.
-	// var restitution = -1; // Impossibly perfectly bouncing walls lose no velocity.
-	var restitution = -0.92;  //The coefficient of restitution of Zectron, the world's bounciest material!
+	var resistance = 1; // Zero friction, would float forever in a vacuum.
+	// var resistance = 0.95; //A pleasant ammount, like an air hockey table.
+	var restitution = -1; // Impossibly perfectly bouncing walls lose no velocity.
+	// var restitution = -0.92;  //The coefficient of restitution of Zectron, the world's bounciest material!
 	
 	var mapCoords = [0,0];
-	var mapVelocity = [0,0];
+	var mapVelocity = [-2,-1.5];
 
 	var mouseLocation;
 	var isDragging = false;
