@@ -1,4 +1,5 @@
 #DIY.org Showcaser!
+![sample.png](Sample)
 
 A web app for showcasing your DIY.org skills!
 
