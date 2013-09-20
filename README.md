@@ -1,9 +1,9 @@
 #DIY.org Showcaser!
-![sample.png](Sample)
+![Example Screen](sample.png)
 
 A web app for showcasing your DIY.org skills!
 
-Displays a hex-grid of all the skill badges on the site, and then highlights yours.
+Displays a hex-grid of all the skill badges on the site, and highlights yours.
 
 Just `npm install` and then `node index.js` to run the server on your port 8005.
 
