@@ -3,13 +3,12 @@ function makeDraggable(){
 	var velocityModeEnabled = true;
 
 	var bouncyMode = true;
-	var bouncing = [false, false];
 
 	//Energy retained from frame to frame:
-	var resistance = 1; // Zero friction, would float forever in a vacuum.
-	// var resistance = 0.95; //A pleasant ammount, like an air hockey table.
-	var restitution = -1; // Impossibly perfectly bouncing walls lose no velocity.
-	// var restitution = -0.92;  //The coefficient of restitution of Zectron, the world's bounciest material!
+	// var resistance = 1; // Zero friction, would float forever in a vacuum.
+	var resistance = 0.95; //A pleasant ammount, like an air hockey table.
+	// var restitution = -1; // Impossibly perfectly bouncing walls lose no velocity.
+	var restitution = -0.92;  //The coefficient of restitution of Zectron, the world's bounciest material!
 	
 	var mapCoords = [0,0];
 	var mapVelocity = [0,0];
@@ -21,13 +20,13 @@ function makeDraggable(){
 
 	$badgeMap = $('div#badgeMap');
 
+//Some notes for adding mobile event handlers eventually:
 	// el.addEventListener("touchstart", handleStart, false);
  //  el.addEventListener("touchend", handleEnd, false);
  //  el.addEventListener("touchcancel", handleCancel, false);
  //  el.addEventListener("touchleave", handleEnd, false);
  //  el.addEventListener("touchmove", handleMove, false);
  //  log("initialized.");
-
 
 	$badgeMap.mousedown(touchedDown)
 
@@ -128,18 +127,12 @@ function makeDraggable(){
 					// console.log("Low x: "+xLimitLow+" Low y: "+yLimitLow);
 					// console.log("High x: "+xLimitHigh+" High y: "+yLimitHigh);
 
-					if( (mapCoords[0] < xLimitLow || mapCoords[0] > xLimitHigh ) && !bouncing[0]){
-						bouncing[0] = true;
+					if( ( mapCoords[0] < xLimitLow && mapVelocity[0] > 0 ) || ( mapCoords[0] > xLimitHigh && mapVelocity[0] < 0 ) ){
 						mapVelocity[0] *= restitution;
-					}else{
-						bouncing[0] = false;
 					}
 
-					if( (mapCoords[1] < yLimitLow || mapCoords[1] > yLimitHigh ) && !bouncing[1]){
+					if( ( mapCoords[1] < yLimitLow && mapVelocity[1] > 0 ) || ( mapCoords[1] > yLimitHigh && mapVelocity[1] < 0 ) ){
 						mapVelocity[1] *= restitution;
-						bouncing[1] = true;
-					}else{
-						bouncing[1] = false;
 					}
 				}
 				
